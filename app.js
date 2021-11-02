@@ -30,10 +30,10 @@ app.post("/", (req, res) =>{
      
     var config = {
       method: 'post',
-      url: 'https://us20.api.mailchimp.com/3.0/lists/e762622ee1/members/',
+      url: '**********',
       headers: { 
-        'Authorization': '3d2bc7a8352a0f135ac8e91fc3d459d9-us20', 
-        'Content-Type': 'text/plain', 
+        'Authorization': '**********', 
+        'Content-Type': '**********', 
       },
       data : data
     };
@@ -58,6 +58,6 @@ app.listen(process.env.PORT || 3000, () =>{
 
 
 
-// API key 3d2bc7a8352a0f135ac8e91fc3d459d9-us20
+// API key '**********'
 
-// List Unique ID Audiance Hibiscos e762622ee1
+// List Unique ID Audiance Hibiscos '**********'
