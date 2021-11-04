@@ -28,7 +28,7 @@ app.post("/", (req, res) =>{
      
     var config = {
       method: 'post',
-      url: 'https://us20.api.mailchimp.com/3.0/lists/e762622ee1/members/',
+      url: '**********',
       headers: { 
         'Authorization': 'Basic cGF0cmljay5hZ3VpYXJAZ21haWwuY29tOjNkMmJjN2E4MzUyYTBmMTM1YWM4ZTkxZmMzZDQ1OWQ5LXVzMjA=', 
         'Content-Type': 'text/plain', 
