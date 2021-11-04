@@ -17,8 +17,6 @@ app.post("/", (req, res) =>{
     const lName = req.body.lname;
     const email = req.body.email;
 
-    console.log(req.body);
-
     const data = {
             email_address: email,
             status: "subscribed",
@@ -32,32 +30,34 @@ app.post("/", (req, res) =>{
       method: 'post',
       url: 'https://us20.api.mailchimp.com/3.0/lists/e762622ee1/members/',
       headers: { 
-        'Authorization': '3d2bc7a8352a0f135ac8e91fc3d459d9-us20', 
+        'Authorization': 'Basic cGF0cmljay5hZ3VpYXJAZ21haWwuY29tOjNkMmJjN2E4MzUyYTBmMTM1YWM4ZTkxZmMzZDQ1OWQ5LXVzMjA=', 
         'Content-Type': 'text/plain', 
+        'Cookie': 'ak_bmsc=BB5B7A8E4FE7904DF874AB7CAC1337F9~000000000000000000000000000000~YAAQxmCWuCfPUdx8AQAAjNxa4w27JvIQzu2cgo7oyJ+z+V88xtwnY3lfyMnkdE8PvwwC9bVkfVvkMsLNQrYtX6AuH6yP9bexvTmMfDlGMSvIk/FDD6ue2N1NK1WkpjP0xahyR1YKtEx2t6hemu//1wEpXnA5M7yHxpm9AsP1HAn0aGHkj8zuPUz7BkBs1zRWbbfa9XObInIFGtNUwPk+aGVsfVjIyV+wS0dfDNCCDt9OZVqFqfBuUQyK/y9n/eoAaUec/DPIXWL3eRBH+MUcv58oJPT9z9J5ANLI9mwJjXESaiRAPrPyqa0w4KkhAmMfOz8KDfNQ6Fga2JSe+Twml8L5hXXd0LHNepvrxn4NU79mOImCTWDiyHug0zLwT/y9gWfUrQ=='
       },
       data : data
     };
     
     axios(config)
     .then(function (response) {
-        return res.sendFile(__dirname + "/success.html");
+      res.sendFile(__dirname + "/success.html");
+      console.log(JSON.stringify(response.data.status));
     })
-    .catch(function (response) {
-       return res.sendFile(__dirname + "/failure.html");
+    .catch(function (error) {
+      if(error.response.data.title == 'Member Exists'){
+        res.sendFile(__dirname + "/emailexists.html");
+      }else if(error.response.data.title == 'Invalid Resource'){
+        res.sendFile(__dirname + "/failure.html");
+      }
+      console.log(error.response.data.status);
+      console.log(error);
     });
 });
-
 app.post("/failure", (req, res) =>{
-    res.redirect("/");
+  res.redirect("/");
 
 });
 
-app.listen(process.env.PORT, () =>{
+
+app.listen(3000, () =>{
     console.log("Server has started");
 });
-
-
-
-// API key 3d2bc7a8352a0f135ac8e91fc3d459d9-us20
-
-// List Unique ID Audiance Hibiscos e762622ee1
