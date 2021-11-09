@@ -12,7 +12,6 @@ app.get("/", (req, res) =>{
 });
 
 app.post("/", (req, res) =>{
-
     const fName = req.body.fname;
     const lName = req.body.lname;
     const email = req.body.email;
@@ -25,10 +24,9 @@ app.post("/", (req, res) =>{
                 LNAME: lName
             }
     };
-     
     var config = {
       method: 'post',
-      url: '**********',
+      url: 'https://us20.api.mailchimp.com/3.0/lists/e762622ee1/members/',
       headers: { 
         'Authorization': 'Basic cGF0cmljay5hZ3VpYXJAZ21haWwuY29tOjNkMmJjN2E4MzUyYTBmMTM1YWM4ZTkxZmMzZDQ1OWQ5LXVzMjA=', 
         'Content-Type': 'text/plain', 
@@ -36,13 +34,12 @@ app.post("/", (req, res) =>{
       },
       data : data
     };
-    
     axios(config)
-    .then(function (response) {
+    .then((response) => {
       res.sendFile(__dirname + "/success.html");
       console.log(JSON.stringify(response.data.status));
     })
-    .catch(function (error) {
+    .catch((error) => {
       if(error.response.data.title == 'Member Exists'){
         res.sendFile(__dirname + "/emailexists.html");
       }else if(error.response.data.title == 'Invalid Resource'){
@@ -54,10 +51,7 @@ app.post("/", (req, res) =>{
 });
 app.post("/failure", (req, res) =>{
   res.redirect("/");
-
 });
-
-
-app.listen(process.env.PORT, () =>{
+app.listen(3000, () =>{
     console.log("Server has started");
 });
