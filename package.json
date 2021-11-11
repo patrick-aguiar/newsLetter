@@ -2,9 +2,9 @@
   "name": "newsletter-signup",
   "version": "1.0.0",
   "description": "API connection with mailChimp API",
-  "main": "app.js",
+  "main": "./src/serve.js",
   "scripts": {
-    "dev": "nodemon app.js"
+    "dev": "nodemon ./src/server.js"
   },
   "author": "Patrick Aguiar de Jesus",
   "license": "ISC",
